@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Almas</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:sans-serif;
+}
+
+.loader-screen{
+    position:fixed;
+    inset:0;
+    background:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:999;
+}
+
+.loader-wrapper{
+    width:850px;
+    position:relative;
+}
+
+.diamond{
+    position:absolute;
+    top:-110px;
+    left:0;
+    width:90px;
+    animation:
+    moveDiamond 2.5s linear forwards,
+    spin 1.2s linear infinite;
+
+    filter:drop-shadow(0 0 18px #00cfff);
+}
+
+@keyframes spin{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+@keyframes moveDiamond{
+
+    from{
+        left:0;
+    }
+
+    to{
+        left:88%;
+    }
+
+}
+
+.loading-track{
+    width:100%;
+    height:26px;
+    background:#111;
+    border-radius:999px;
+    overflow:hidden;
+}
+
+.loading-fill{
+    width:0%;
+    height:100%;
+    border-radius:999px;
+
+    background:linear-gradient(
+    90deg,
+    #00bfff,
+    #67e8ff,
+    #009dff
+    );
+
+    box-shadow:
+    0 0 20px #00cfff,
+    0 0 45px #00cfff;
+
+    animation:fillBar 2.5s linear forwards;
+}
+
+@keyframes fillBar{
+
+    from{
+        width:0%;
+    }
+
+    to{
+        width:100%;
+    }
+
+}
+
+.fireworks{
+    position:fixed;
+    inset:0;
+    display:none;
+    overflow:hidden;
+}
+
+.firework{
+    position:absolute;
+    bottom:-100px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#00bfff;
+    animation:shoot 1.3s ease-out forwards;
+}
+
+.firework::before,
+.firework::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    box-shadow:
+    0 -50px #00bfff,
+    0 50px #00bfff,
+    50px 0 #00bfff,
+    -50px 0 #00bfff,
+    35px 35px #67e8ff,
+    -35px -35px #67e8ff,
+    -35px 35px #67e8ff,
+    35px -35px #67e8ff;
+
+    animation:explode 1s ease-out forwards;
+}
+
+@keyframes shoot{
+
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-500px);
+        opacity:1;
+    }
+
+}
+
+@keyframes explode{
+
+    from{
+        transform:scale(0.2);
+        opacity:1;
+    }
+
+    to{
+        transform:scale(1.4);
+        opacity:0;
+    }
+
+}
+
+.birthday-text{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:90px;
+    font-weight:bold;
+    color:#00bfff;
+    opacity:0;
+    transform:scale(0.7);
+    transition:1.5s ease;
+
+    text-shadow:
+    0 0 20px #00cfff,
+    0 0 40px #00cfff;
+}
+
+.birthday-text.show{
+    opacity:1;
+    transform:scale(1);
+}
+
+</style>
+</head>
+<body>
+
+<div class="loader-screen" id="loader">
+
+    <div class="loader-wrapper">
+
+        <img
+        class="diamond"
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Diamond_icon.svg/2048px-Diamond_icon.svg.png"
+        alt="diamond"
+        >
+
+        <div class="loading-track">
+            <div class="loading-fill"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="fireworks" id="fireworks">
+
+    <div class="firework" style="left:10%; animation-delay:0s;"></div>
+    <div class="firework" style="left:28%; animation-delay:0.3s;"></div>
+    <div class="firework" style="left:50%; animation-delay:0.6s;"></div>
+    <div class="firework" style="left:72%; animation-delay:0.9s;"></div>
+    <div class="firework" style="left:90%; animation-delay:1.2s;"></div>
+
+</div>
+
+<div class="birthday-text" id="text">
+    🎉 عيد ميلاد سعيد يا الماس 🎉
+</div>
+
+<script>
+
+setTimeout(() => {
+
+    document.getElementById("loader").style.display = "none";
+
+    document.getElementById("fireworks").style.display = "block";
+
+},2500);
+
+setTimeout(() => {
+
+    document.getElementById("text").classList.add("show");
+
+},5000);
+
+</script>
+
+</body>
+</html>
